@@ -1,0 +1,94 @@
+﻿Nodes 13
+NODE age multie
+PARENTS
+VALUES child adult middle eledery
+DISTRIBUTION 4
+child 0.3
+adult 0.4
+middle 0.2
+eledery 0.1
+
+NODE hereditary boolean
+PARENTS
+boolean
+DISTRIBUTION 1
+0.25
+
+NODE weak boolean
+PARENTS age
+boolean
+DISTRIBUTION 4
+age=child 0.75
+age=adult 0.1
+age=middle 0.2
+age=eledery 0.85
+
+NODE deposits boolean
+PARENTS age hereditary
+boolean
+DISTRIBUTION 8
+age=child hereditary=true 0.2
+age=child hereditary=false 0.05
+age=adult hereditary=true 0.6
+age=adult hereditary=false 0.2
+age=middle hereditary=true 0.6
+age=middle hereditary=false 0.4
+age=eledery hereditary=true 0.8
+age=eledery hereditary=false 0.5
+
+NODE cold boolean
+PARENTS weak
+boolean
+DISTRIBUTION 2
+weak=true 0.7
+weak=false 0.5
+
+NODE flu boolean
+PARENTS weak
+boolean
+DISTRIBUTION 2
+weak=true 0.4
+weak=false 0.2
+
+NODE pneumonia boolean
+PARENTS weak
+boolean
+DISTRIBUTION 2
+weak=true 0.4
+weak=false 0.15
+
+NODE virus boolean
+PARENTS weak
+boolean
+DISTRIBUTION 2
+weak=true 0.5
+weak=false 0.2
+
+NODE angina boolean
+PARENTS deposits
+boolean
+DISTRIBUTION 2
+deposits=true 0.5
+deposits=false 0.1
+
+NODE Atherosclerosis boolean
+PARENTS deposits
+boolean
+DISTRIBUTION 2
+deposits=true 0.5
+deposits=false 0.1
+
+NODE sore noisyOR
+PARENTS cold flu
+boolean
+DISTRIBUTION 0.3 0.2
+
+NODE temperature noisyOR
+PARENTS cold flu pneumonia virus
+boolean
+DISTRIBUTION 0.7 0.4 0.3 0.5
+
+NODE cholesterol noisyOR
+PARENTS angina Atherosclerosis
+boolean
+DISTRIBUTION 0.4 0.2
